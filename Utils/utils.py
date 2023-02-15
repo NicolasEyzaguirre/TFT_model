@@ -2,7 +2,12 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os 
 
+def ubicacion():
+    current_directory = os.getcwd()
+    parent_directory = os.path.dirname(current_directory)
+    os.chdir(parent_directory)
 
 
 def limpieza (show=False,plot=0):
@@ -238,17 +243,17 @@ def limpieza (show=False,plot=0):
 
         plt.subplot(131)
         sns.set(rc={'figure.figsize':(13,8)})
-        sns.countplot(data=Data[Data['AoShin']>0], x='AoShin', hue='placement')
+        sns.countplot(data=Data[Data['Olaf']>0], x='Olaf', hue='placement')
         sns.despine()
 
         plt.subplot(132)
         sns.set(rc={'figure.figsize':(13,8)})
-        sns.countplot(data=Data[Data['Shyvana']>0], x='Shyvana', hue='placement')
+        sns.countplot(data=Data[Data['Nidalee']>0], x='Nidalee', hue='placement')
         sns.despine()
 
         plt.subplot(133)
         sns.set(rc={'figure.figsize':(13,8)})
-        sns.countplot(data=Data, x='Bard', hue='placement')
+        sns.countplot(data=Data[Data['Bard']>0], x='Bard', hue='placement')
         sns.despine()
 
     if plot==4:
@@ -276,7 +281,7 @@ def limpieza (show=False,plot=0):
         return Data.head(8)
     
 
-def limpieza_2():
+def limpieza_2(show=False):
     Data=pd.read_csv('Data/Test.csv')
 
     items_=Data.columns[Data.columns.str.contains(r'(_item\d$)')]
@@ -475,4 +480,6 @@ def limpieza_2():
         }
     Data['placement'] = Data['placement'].replace(placement)
     Data.to_csv('Data/Test_clean.csv') 
+    if show == True :
+        return Data.head(8)
     
