@@ -23,5 +23,6 @@ def modelado(modelo=0):
             logModel.fit(X_train, y_train)
             with open('model/model_23_02_14','wb') as archivo_salida:
                 pickle.dump(logModel,archivo_salida)
-
+            predictions_log2=logModel.predict(X_test)
+            return accuracy_score(y_test, predictions_log2)
 
